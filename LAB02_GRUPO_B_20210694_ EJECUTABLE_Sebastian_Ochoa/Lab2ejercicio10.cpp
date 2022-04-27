@@ -1,6 +1,7 @@
 //10. Escribir un programa que pida al usuario una palabra y luego muestre
 //por pantalla una a una las letras de la palabra introducida empezando por la
 //última. 
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

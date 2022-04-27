@@ -1,4 +1,5 @@
 //5. Elabore un programa que lea n números y determine cuál es el mayor, el menor y la media de los números leídos. 
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

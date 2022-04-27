@@ -1,4 +1,5 @@
 //8. Escribir un programa que genere la tabla de multiplicar de un número introducido por el teclado. 
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

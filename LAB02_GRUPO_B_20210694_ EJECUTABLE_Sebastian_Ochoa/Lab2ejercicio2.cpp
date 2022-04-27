@@ -1,4 +1,5 @@
 //2. Calcule los primeros 50 números primos y muestre el resultado en pantalla.
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

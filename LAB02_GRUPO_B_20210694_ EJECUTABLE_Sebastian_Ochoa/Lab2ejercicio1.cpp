@@ -1,4 +1,5 @@
 //1. Sumar todos los enteros pares desde 2 hasta 100.
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 
 #include<iostream>
 #include <conio.h>

@@ -1,5 +1,6 @@
 //4. Escriba un código que solicite ingresar dos números 𝑥 y 𝑦, tal que 𝑥 < 𝑦. Muestre todos los números primos que se encuentren entre el rango de 
-//valores, de no encontrarse, mostrar el primo más cercano a 𝑥 o 𝑦. 
+//valores, de no encontrarse, mostrar el primo más cercano a 𝑥 o 𝑦.
+//Sebastian Andre Ochoa Ortiz Cui:20210694 
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

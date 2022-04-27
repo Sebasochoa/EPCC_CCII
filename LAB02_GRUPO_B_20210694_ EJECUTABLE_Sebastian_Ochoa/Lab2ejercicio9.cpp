@@ -1,6 +1,7 @@
 //9. Escribir un programa que pida al usuario un número entero y muestre
 //por pantalla un triángulo rectángulo como el de más abajo, de altura el
 //número introducido. 
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

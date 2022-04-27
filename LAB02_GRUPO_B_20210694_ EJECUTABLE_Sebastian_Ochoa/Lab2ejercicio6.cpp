@@ -1,6 +1,7 @@
 //6. Elabore un programa que calcule la serie de Fibonacci. La serie de
 //Fibonacci es la sucesión de números: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... Cada
-//número se calcula sumando los dos anteriores a él. 
+//número se calcula sumando los dos anteriores a él.
+//Sebastian Andre Ochoa Ortiz Cui:20210694 
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>

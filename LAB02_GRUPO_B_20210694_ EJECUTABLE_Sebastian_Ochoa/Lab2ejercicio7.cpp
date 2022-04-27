@@ -1,4 +1,5 @@
 //7. Calcula el promedio de 3 notas para n estudiantes. 
+//Sebastian Andre Ochoa Ortiz Cui:20210694
 #include<iostream>
 #include <conio.h>
 #include <stdio.h>
