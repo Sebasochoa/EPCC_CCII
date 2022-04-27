@@ -12,7 +12,8 @@ int main()
     cin >>n;
     for (int i = 0; i < n; i++)
     {
-        cout<<"Estudiante N "<<i+1<<endl;
+        cout<<"Estudiante N: "<<i+1<<endl;
+    
         float sum = 0;
         for (int j = 0; j< 3; j++)
         {
