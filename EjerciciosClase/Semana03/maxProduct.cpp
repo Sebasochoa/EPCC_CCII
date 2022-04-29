@@ -25,6 +25,6 @@ int main()
         }
         
     }
-    cout<<aux;
+    cout<<"El producto mas alto es: "<<aux;
     
 }
