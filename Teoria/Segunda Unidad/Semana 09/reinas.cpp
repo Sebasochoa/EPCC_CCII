@@ -51,16 +51,17 @@ void Mostrar(string **reinas)
         cout << endl;
     }
 }
-bool Puede_comer(string **reinas){
-    int filN,colN,filB,colB;
+bool Puede_comer(string **reinas)
+{
+    int filN, colN, filB, colB;
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
         {
-            if (*(*(reinas + i) + j)=="N")
+            if (*(*(reinas + i) + j) == "N")
             {
-                filN=i;
-                colN=j;
+                filN = i;
+                colN = j;
             }
         }
     }
@@ -75,8 +76,8 @@ bool Puede_comer(string **reinas){
             }
         }
     }
-    int auxi=1,auxj=1;
-    if (filB==filN || colB==colN)
+    int auxi = 1, auxj = 1;
+    if (filB == filN || colB == colN)
     {
         return true;
     }
@@ -95,7 +96,7 @@ bool Puede_comer(string **reinas){
         }
         auxi++;
         auxj++;
-    } while ((filB + auxi) < 9 && (colB + auxj) < 9 && (filB - auxi) >= 0 && (colB - auxj) >= 0);
+    } while ((filB + auxi) <= 8 && (colB + auxj) <= 8 && (filB - auxi) >= 0 && (colB - auxj) >= 0);
     return false;
 }
 int main()
@@ -105,12 +106,13 @@ int main()
     Lugar_Blancas(reinas, 4, 4);
     Lugar_Negras(reinas, 1, 7);
     Mostrar(reinas);
-    if(Puede_comer(reinas)==true){
-        cout<<"Las Reinas pueden atacarse entre si";
+    if (Puede_comer(reinas) == true)
+    {
+        cout << "Las Reinas pueden atacarse entre si";
     }
     else
     {
-        cout<<"Las einas no pueden atacarse";
+        cout << "Las Reinas no pueden atacarse";
     }
     return 0;
 }
