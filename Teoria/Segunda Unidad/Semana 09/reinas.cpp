@@ -106,11 +106,11 @@ int main()
     Lugar_Negras(reinas, 1, 7);
     Mostrar(reinas);
     if(Puede_comer(reinas)==true){
-        cout<<"Las reinas pueden atacarse entre si";
+        cout<<"Las Reinas pueden atacarse entre si";
     }
     else
     {
-        cout<<"Las reinas no pueden atacarse";
+        cout<<"Las einas no pueden atacarse";
     }
     return 0;
 }
