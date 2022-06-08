@@ -119,11 +119,6 @@ void eliminar_pos(int pos){
         delete aux_borrar;
     }
 }
-void cantidad(){
-    T=I;
-    cout<<T->cant;
-    
-}
 int main()
 {
     agregar_final(2);
@@ -132,7 +127,6 @@ int main()
     agregar_final(3);
     agregar_inicio(9);
     agregar_pos(7,5);
-    presentar_I();
     eliminar_pos(5);
     presentar_I();
     return 0;
