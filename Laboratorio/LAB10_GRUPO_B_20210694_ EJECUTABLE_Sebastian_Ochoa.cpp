@@ -1,122 +1,164 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 class nodo
 {
 private:
-    
 public:
     int id;
-    int cant=0;
+    int cant = 0;
     nodo *sig;
     nodo *ant;
-    
 };
-nodo *I,*F,*T;
-void agregar_final(int x){
-    T=new nodo();
-    T->id=x;
-    T->sig=NULL;
-    T->ant=NULL;
-    //T->cant=T->cant+1;
-    if (I==NULL)
+nodo *I, *F, *T;
+void agregar_final(int x)
+{
+    T = new nodo();
+    T->id = x;
+    T->sig = NULL;
+    T->ant = NULL;
+    // T->cant=T->cant+1;
+    if (I == NULL)
     {
-        I=T;
+        I = T;
     }
     else
     {
-        F->sig=T;
-        T->ant=F;
+        F->sig = T;
+        T->ant = F;
     }
-    F=T;
+    F = T;
 }
-void agregar_inicio(int x){
-    T=new nodo();
-    T->id=x;
-    T->sig=NULL;
-    T->ant=NULL;
-    //T->cant=T->cant+1;
-    if (I==NULL)
+void agregar_inicio(int x)
+{
+    T = new nodo();
+    T->id = x;
+    T->sig = NULL;
+    T->ant = NULL;
+    // T->cant=T->cant+1;
+    if (I == NULL)
     {
-        I=T;
+        I = T;
     }
     else
     {
-        I->ant=T;
-        T->sig=I;
+        I->ant = T;
+        T->sig = I;
     }
-    I=T;
+    I = T;
 }
-void agregar_pos(int x,int pos){
-    T=new nodo();
-    T->id=x;
-    T->sig=NULL;
-    T->ant=NULL;
+void agregar_pos(int x, int pos)
+{
+    T = new nodo();
+    T->id = x;
+    T->sig = NULL;
+    T->ant = NULL;
     nodo *anterior;
     nodo *aux;
-    for (aux=I;aux!=NULL;aux=aux->sig)
+    for (aux = I; aux != NULL; aux = aux->sig)
     {
-        if (aux->id==pos)
+        if (aux->id == pos)
         {
-            anterior=aux->ant;
+            anterior = aux->ant;
         }
     }
-    if (I==NULL)
+    if (I == NULL)
     {
-        I=T;
+        I = T;
     }
     else
     {
-        T->sig=anterior->sig;
-        anterior->sig=T;
+        T->sig = anterior->sig;
+        anterior->sig = T;
     }
-    
 }
-void presentar_I(){
-    cout<<"La lista es:\n";
-    for (T=I;T!=NULL; T=T->sig)
+void presentar_I()
+{
+    cout << "La lista es:\n";
+    for (T = I; T != NULL; T = T->sig)
     {
-        cout<<"ID:"<<T->id<<"\t";
+        cout << "ID:" << T->id << "\t";
     }
-    cout<<endl;
+    cout << endl;
 }
-void eliminar_final(){
-    if (I!=NULL)
+void eliminar_final()
+{
+    if (I != NULL)
     {
+        nodo *aux_borrar;
+        nodo *anterior = NULL;
+        aux_borrar = I;
+        while ((aux_borrar != NULL) && (aux_borrar->sig != NULL))
+        {
+            anterior = aux_borrar;
+            aux_borrar = aux_borrar->sig;
+        }
+        anterior->sig = aux_borrar->sig;
+        delete aux_borrar;
+    }
+}
+void eliminar_inicio()
+{
+    if (I != NULL)
+    {
+        nodo *aux_borrar;
+        nodo *anterior = NULL;
+        aux_borrar = I;
+        I = I->sig;
+        delete aux_borrar;
+    }
+}
+void eliminar_pos(int pos)
+{
+    if (I != NULL)
+    {
+        
         nodo *aux_borrar;
         nodo *anterior=NULL;
         aux_borrar=I;
-        while ((aux_borrar!=NULL)&&(aux_borrar->sig!=NULL))            
+        while ((aux_borrar!=NULL)&&(aux_borrar->id!=pos))
         {
             anterior=aux_borrar;
             aux_borrar=aux_borrar->sig;
         }
         anterior->sig=aux_borrar->sig;
         delete aux_borrar;
+        
     }
 }
-void eliminar_inicio(){
-    if (I!=NULL)
-    {
-        nodo *aux_borrar;
-        nodo *anterior=NULL;
-        aux_borrar=I;
-        I=I->sig;
-        delete aux_borrar;
-    }
-}
-void eliminar_pos(int pos){
-    if (I!=NULL)
-    {
-        nodo *aux_borrar;
-        nodo *anterior=NULL;
-        aux_borrar=I;
-        while ((aux_borrar!=NULL)&&(aux_borrar->id!=pos))            
+void ordenar_ascendente(){
+    nodo *p=I;
+    while(p!=NULL){
+        nodo *T=p->sig;
+        while (T!=NULL)
         {
-            anterior=aux_borrar;
-            aux_borrar=aux_borrar->sig;
+            if (p->id>T->id)
+            {
+                int aux=T->id;
+                T->id=p->id;
+                p->id=aux;
+
+            }
+            T=T->sig;
         }
-        anterior->sig=aux_borrar->sig;
-        delete aux_borrar;
+        p=p->sig;
+    }
+}
+void ordenar_descendente(){
+    nodo *p=I;
+    while(p!=NULL){
+        nodo *T=p->sig;
+        while (T!=NULL)
+        {
+            if (p->id<T->id)
+            {
+                int aux=T->id;
+                T->id=p->id;
+                p->id=aux;
+
+            }
+            T=T->sig;
+        }
+        p=p->sig;
     }
 }
 int main()
@@ -126,8 +168,10 @@ int main()
     agregar_inicio(5);
     agregar_final(3);
     agregar_inicio(9);
-    agregar_pos(7,5);
-    eliminar_pos(5);
+    agregar_pos(7, 5);
+    presentar_I();
+    //eliminar_pos(2);
+    ordenar_descendente();
     presentar_I();
     return 0;
 }
