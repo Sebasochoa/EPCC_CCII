@@ -7,7 +7,6 @@ public:
     int id;
     int cant = 0;
     nodo *sig;
-    nodo *ant;
 };
 nodo *I, *F, *T;
 void agregar_final(int x)
@@ -15,8 +14,6 @@ void agregar_final(int x)
     T = new nodo();
     T->id = x;
     T->sig = NULL;
-    T->ant = NULL;
-    // T->cant=T->cant+1;
     if (I == NULL)
     {
         I = T;
@@ -24,7 +21,6 @@ void agregar_final(int x)
     else
     {
         F->sig = T;
-        T->ant = F;
     }
     F = T;
 }
@@ -33,15 +29,12 @@ void agregar_inicio(int x)
     T = new nodo();
     T->id = x;
     T->sig = NULL;
-    T->ant = NULL;
-    // T->cant=T->cant+1;
     if (I == NULL)
     {
         I = T;
     }
     else
     {
-        I->ant = T;
         T->sig = I;
     }
     I = T;
@@ -51,14 +44,13 @@ void agregar_pos(int x, int pos)
     T = new nodo();
     T->id = x;
     T->sig = NULL;
-    T->ant = NULL;
-    nodo *anterior;
+    nodo *siguiente;
     nodo *aux;
     for (aux = I; aux != NULL; aux = aux->sig)
     {
         if (aux->id == pos)
         {
-            anterior = aux->ant;
+            siguiente = aux;
         }
     }
     if (I == NULL)
@@ -67,11 +59,11 @@ void agregar_pos(int x, int pos)
     }
     else
     {
-        T->sig = anterior->sig;
-        anterior->sig = T;
+        T->sig = siguiente->sig;
+        siguiente->sig = T;
     }
 }
-void presentar_I()
+void presentar()
 {
     cout << "La lista es:\n";
     for (T = I; T != NULL; T = T->sig)
@@ -84,94 +76,180 @@ void eliminar_final()
 {
     if (I != NULL)
     {
-        nodo *aux_borrar;
-        nodo *anterior = NULL;
-        aux_borrar = I;
-        while ((aux_borrar != NULL) && (aux_borrar->sig != NULL))
+        nodo *aux;
+        nodo *valor = NULL;
+        aux = I;
+        while ((aux != NULL) && (aux->sig != NULL))
         {
-            anterior = aux_borrar;
-            aux_borrar = aux_borrar->sig;
+            valor = aux;
+            aux = aux->sig;
         }
-        anterior->sig = aux_borrar->sig;
-        delete aux_borrar;
+        valor->sig = aux->sig;
+        delete aux;
     }
 }
 void eliminar_inicio()
 {
     if (I != NULL)
     {
-        nodo *aux_borrar;
-        nodo *anterior = NULL;
-        aux_borrar = I;
+        nodo *aux;
+        aux = I;
         I = I->sig;
-        delete aux_borrar;
+        delete aux;
     }
 }
 void eliminar_pos(int pos)
 {
     if (I != NULL)
     {
-        
-        nodo *aux_borrar;
-        nodo *anterior=NULL;
-        aux_borrar=I;
-        while ((aux_borrar!=NULL)&&(aux_borrar->id!=pos))
+
+        nodo *aux;
+        nodo *siguiente;
+        aux = I;
+        while ((aux != NULL) && (aux->id != pos))
         {
-            anterior=aux_borrar;
-            aux_borrar=aux_borrar->sig;
+            siguiente = aux;
+            aux = aux->sig;
         }
-        anterior->sig=aux_borrar->sig;
-        delete aux_borrar;
-        
+        siguiente->sig = aux->sig;
+        delete aux;
     }
 }
-void ordenar_ascendente(){
-    nodo *p=I;
-    while(p!=NULL){
-        nodo *T=p->sig;
-        while (T!=NULL)
+void ordenar_ascendente()
+{
+    nodo *p = I;
+    while (p != NULL)
+    {
+        nodo *T = p->sig;
+        while (T != NULL)
         {
-            if (p->id>T->id)
+            if (p->id > T->id)
             {
-                int aux=T->id;
-                T->id=p->id;
-                p->id=aux;
-
+                int aux = T->id;
+                T->id = p->id;
+                p->id = aux;
             }
-            T=T->sig;
+            T = T->sig;
         }
-        p=p->sig;
+        p = p->sig;
     }
 }
-void ordenar_descendente(){
-    nodo *p=I;
-    while(p!=NULL){
-        nodo *T=p->sig;
-        while (T!=NULL)
+void ordenar_descendente()
+{
+    nodo *p = I;
+    while (p != NULL)
+    {
+        nodo *T = p->sig;
+        while (T != NULL)
         {
-            if (p->id<T->id)
+            if (p->id < T->id)
             {
-                int aux=T->id;
-                T->id=p->id;
-                p->id=aux;
-
+                int aux = T->id;
+                T->id = p->id;
+                p->id = aux;
             }
-            T=T->sig;
+            T = T->sig;
         }
-        p=p->sig;
+        p = p->sig;
     }
+}
+void elementosingresar_F()
+{
+    int n;
+    cout << "Cuantos elementos quiere ingresar: ";
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int v;
+        cout << "Ingrese Valor: ";
+        cin >> v;
+        agregar_final(v);
+    }
+}
+void elementosingresar_I()
+{
+    int n;
+    cout << "Cuantos elementos quiere ingresar: ";
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int v;
+        cout << "Ingrese Valor: ";
+        cin >> v;
+        agregar_inicio(v);
+    }
+}
+void elementosingresar_pos()
+{
+    int v, x;
+    cout << "Ingrese Valor a ingresar: ";
+    cin >> v;
+    cout << "Ingrese el valor a desplazar: ";
+    cin >> x;
+    agregar_pos(x, v);
+}
+void pos_elm()
+{
+    int v;
+    cout << "Ingrese el valor a eliminar: ";
+    cin >> v;
+    eliminar_pos(v);
 }
 int main()
 {
-    agregar_final(2);
-    agregar_final(1);
-    agregar_inicio(5);
-    agregar_final(3);
-    agregar_inicio(9);
-    agregar_pos(7, 5);
-    presentar_I();
-    //eliminar_pos(2);
-    ordenar_descendente();
-    presentar_I();
+    int opc;
+    bool valid = false;
+    cout << "***************MEN" << char(233) << " LISTA ENLAZADA***************" << endl;
+    cout << "1: Agregar elementos al inicio\n";
+    cout << "2: Agregar elementos al final\n";
+    cout << "3: Agregar elementos en un posici" << char(162) << "n de la lista\n";
+    cout << "4: Eliminar el primer elemento de la lista\n";
+    cout << "5: Eliminar el " << char(163) << "ltimo elemento de la lista\n";
+    cout << "6: Eliminar un n" << char(163) << "mero espec" << char(161) << "fico de la lista\n";
+    cout << "7: Ordenar ascendentemente la lista\n";
+    cout << "8: Ordenar descendentemente la lista\n";
+    cout << "9: Mostrar la lista\n";
+    cout << "0: SALIR\n";
+    do
+    {
+        cout << "Ingrese una opcion valida: ";
+        cin >> opc;
+        switch (opc)
+        {
+        case 1:
+            elementosingresar_I();
+            break;
+        case 2:
+            elementosingresar_F();
+            break;
+        case 3:
+            elementosingresar_pos();
+            break;
+        case 4:
+            eliminar_inicio();
+            break;
+        case 5:
+            eliminar_final();
+            break;
+        case 6:
+            pos_elm();
+            break;
+        case 7:
+            ordenar_ascendente();
+            break;
+        case 8:
+            ordenar_descendente();
+            break;
+        case 9:
+            presentar();
+            break;
+        case 0:
+            valid = true;
+            break;
+        default:
+            cout << "Opcion no valida.\a\n";
+            break;
+        }
+    } while (valid!=true);
     return 0;
 }
