@@ -220,7 +220,7 @@ void pos_elm()
     eliminar_pos(v);
 }
 int main()
-{/*
+{
     int opc;
     bool valid = false;
     cout << "***************MEN" << char(233) << " LISTA ENLAZADA***************" << endl;
@@ -275,13 +275,6 @@ int main()
             break;
         }
     } while (valid != true);
-    system("pause");*/
-    agregar_final(1);
-    agregar_final(2);
-    agregar_final(3);
-    agregar_final(4);
-    presentar();
-    elementosingresar_pos();
-    presentar();
+    system("pause");
     return 0;
 }
