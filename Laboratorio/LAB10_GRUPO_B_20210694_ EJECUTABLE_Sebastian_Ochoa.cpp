@@ -210,7 +210,7 @@ void elementosingresar_pos()
     cin >> v;
     cout << "Ingrese el valor a desplazar: ";
     cin >> x;
-    agregar_pos(x, v);
+    agregar_pos(v, x);
 }
 void pos_elm()
 {
@@ -220,7 +220,7 @@ void pos_elm()
     eliminar_pos(v);
 }
 int main()
-{
+{/*
     int opc;
     bool valid = false;
     cout << "***************MEN" << char(233) << " LISTA ENLAZADA***************" << endl;
@@ -275,5 +275,13 @@ int main()
             break;
         }
     } while (valid != true);
+    system("pause");*/
+    agregar_final(1);
+    agregar_final(2);
+    agregar_final(3);
+    agregar_final(4);
+    presentar();
+    elementosingresar_pos();
+    presentar();
     return 0;
 }
