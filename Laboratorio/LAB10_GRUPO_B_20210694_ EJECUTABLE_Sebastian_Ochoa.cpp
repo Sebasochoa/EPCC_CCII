@@ -141,6 +141,7 @@ void ordenar_ascendente()
         }
         p = p->sig;
     }
+    cout<<"Lista ordenada\n";
 }
 void ordenar_descendente()
 {
@@ -160,6 +161,7 @@ void ordenar_descendente()
         }
         p = p->sig;
     }
+    cout<<"Lista ordenada\n";
 }
 void elementosingresar_F()
 {
