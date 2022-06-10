@@ -62,13 +62,14 @@ void agregar_pos(int x, int pos)
         T->sig = siguiente->sig;
         siguiente->sig = T;
     }
+    cout << "Elemento agregado\n";
 }
 void presentar()
 {
     cout << "La lista es:\n";
     for (T = I; T != NULL; T = T->sig)
     {
-        cout << "ID:" << T->id << "\t";
+        cout << "Int:" << T->id << "\t";
     }
     cout << endl;
 }
@@ -87,6 +88,7 @@ void eliminar_final()
         valor->sig = aux->sig;
         delete aux;
     }
+    cout << "Elemento eliminado\n";
 }
 void eliminar_inicio()
 {
@@ -97,6 +99,7 @@ void eliminar_inicio()
         I = I->sig;
         delete aux;
     }
+    cout << "Elemento eliminado\n";
 }
 void eliminar_pos(int pos)
 {
@@ -110,10 +113,15 @@ void eliminar_pos(int pos)
         {
             siguiente = aux;
             aux = aux->sig;
+            if (aux->id != pos)
+            {
+                cout << "Numero no encontrado\n";
+            }
         }
         siguiente->sig = aux->sig;
         delete aux;
     }
+    cout << "Elemento eliminado\n";
 }
 void ordenar_ascendente()
 {
@@ -165,6 +173,14 @@ void elementosingresar_F()
         cin >> v;
         agregar_final(v);
     }
+    if (n == 1)
+    {
+        cout << "Elemento agregado\n";
+    }
+    else
+    {
+        cout << "Elementos agregados\n";
+    }
 }
 void elementosingresar_I()
 {
@@ -177,6 +193,14 @@ void elementosingresar_I()
         cout << "Ingrese Valor: ";
         cin >> v;
         agregar_inicio(v);
+    }
+    if (n == 1)
+    {
+        cout << "Elemento agregado\n";
+    }
+    else
+    {
+        cout << "Elementos agregados\n";
     }
 }
 void elementosingresar_pos()
@@ -250,6 +274,6 @@ int main()
             cout << "Opcion no valida.\a\n";
             break;
         }
-    } while (valid!=true);
+    } while (valid != true);
     return 0;
 }
