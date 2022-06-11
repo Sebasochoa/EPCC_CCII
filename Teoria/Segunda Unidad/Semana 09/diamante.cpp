@@ -1,66 +1,83 @@
-//ABCDEFGHIJKKLMNOPQRSTUVWXYZ
-//65-90
-#include<iostream>
-#include<sstream>
+// ABCDEFGHIJKKLMNOPQRSTUVWXYZ
+// 65-90
+#include <iostream>
+#include <sstream>
 using namespace std;
-void crear(char c){
-    int len=int(c)-64;
-    for (int i = 0; i < len-1; i++)
+void mostrar(string s){
+    cout<<s;
+}
+void crear(char c,string s)
+{
+    int len = int(c) - 64;
+    int lencon = (len * 2) - 1;
+    int espi = 0;
+    int alt = 1;
+    int espd = lencon / 2;
+    int espa = lencon / 2;
+    int resta = len - 1;
+    ostringstream o;
+    while (alt <= lencon / 2 + 1)
     {
-        for (int j = 0; j < len-1; j++)
+        for (int i = 1; i <= espd; i++)
         {
-            cout<<"*  ";
+            o << "*";
         }
-        cout<<endl;
+        o << char(c - resta);
+        for (int i = 1; i < espi; i++)
+        {
+            o << "*";
+        }
+        if (alt > 1)
+        {
+            o << char(c - resta);
+        }
+        for (int i = espa; i > 0; i--)
+        {
+            o << "*";
+        }
+        o << "" << endl;
+        alt++;
+        espd--;
+        espa--;
+        espi += 2;
+        resta--;
     }
-    
+    espi = lencon - 3;
+    espd = 1;
+    espa=1;
+    alt = 0;
+    while (alt < lencon / 2)
+    {
+        for (int i = 1; i <= espd; i++)
+        {
+            o << "*";
+        }
+        o << char(c + resta);
+        for (int i = 1; i < espi; i++)
+        {
+            o << "*";
+        }
+        if (alt < lencon / 2 - 1)
+        {
+            o << char(c + resta);
+        }
+        for (int i = espa; i > 0; i--)
+        {
+            o << "*";
+        }
+        o << "" << endl;
+        alt++;
+        espd++;
+        espa++;
+        espi -= 2;
+        resta--;
+    }
+    s = o.str();
+    mostrar(s);
 }
-void letras(char c){ 
-    int c1=int(c);
-}
+
 int main()
 {
-    crear('E');
+    string s;
+    crear('E',s);
 }
-/*
-int cont = 0, cont2 = 1, n=5;
-	for (int fila1 = 1; fila1 <= n; fila1++)
-	{
-		for (int e = 1; e <= n - fila1; e++)
-		{
-			cout << " ";
-		}
-		for (int col = 1; col <= (cont + 1); col++)
-		{
-
-			cout << "1";
-
-		}
-		for (int col2 = fila1 - 1; col2 > 0; col2--){
-
-			cout << "1";
-		}
-		cont++;
-		cout << endl;
-	}
-	for (int fila2 = 1; fila2 <= n - 1; fila2++)
-	{
-		for (int e = 1; e <= fila2; e++)
-		{
-			cout << " ";
-		}
-		for (int col3 = 1; col3 <= (n - fila2); col3++)
-		{
-
-			cout << "1";
-
-		}
-		for (int col2 = (n - fila2) - 1; col2 >0; col2--)
-
-		{
-			cout << "1";
-		}
-		cont2++;
-
-		cout << endl;
-		*/
