@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-string **reinas;
-void crear_matriz()
+string **reinas;                    
+void crear_matriz()                 
 {
     reinas = new string *[8];
     for (int i = 0; i < 8; i++)
@@ -101,10 +101,15 @@ bool Puede_comer(string **reinas)
 }
 int main()
 {
+    int negrax,negray,blancax,blancay;
     crear_matriz();
     llenar_matriz(reinas);
-    Lugar_Blancas(reinas, 4, 4);
-    Lugar_Negras(reinas, 1, 7);
+    cout<<"Ingrese posicion de reina blanca en eje x: "; cin>>blancax;
+    cout<<"Ingrese posicion de reina blanca en eje y: "; cin>>blancay;
+    Lugar_Blancas(reinas, blancax, blancay);
+    cout<<"Ingrese posicion de reina negra en eje x: "; cin>>negrax;
+    cout<<"Ingrese posicion de reina negra en eje y: "; cin>>negray;
+    Lugar_Negras(reinas, negrax, negray);
     Mostrar(reinas);
     if (Puede_comer(reinas) == true)
     {
