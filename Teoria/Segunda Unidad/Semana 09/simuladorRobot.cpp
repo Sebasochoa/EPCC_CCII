@@ -101,7 +101,14 @@ void robot::instrucciones(string ins){
 
 int main()
 {
-    robot r1('N', 7, 3);
-    r1.instrucciones("DAAIAI");
+    char orient;
+    int posx,posy;
+    string instrucciones;
+    cout<<"Ingrese la orientacion del robot (N,S,E,O): "; cin>>orient;
+    cout<<"Ingrese la posicion del robot en eje X: "; cin>>posx;
+    cout<<"Ingrese la posicion del robot en eje Y: "; cin>>posy;
+    robot r1(orient, posx, posy);
+    cout<<"Ingrese las instrucciones del robot: "; cin>>instrucciones;
+    r1.instrucciones(instrucciones);
     return 0;
 }
