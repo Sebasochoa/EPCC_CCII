@@ -53,7 +53,7 @@ void Busqueda(int pos)
         }
         if (val!=NULL)
             {
-                cout << "Elemento (" << aux->id << ") encontrado\n";
+                cout << "Elemento (" << val << ") encontrado\n";
             }
             else
             {
@@ -155,7 +155,7 @@ int main()
             valid = true;
             break;
         default:
-            cout << "Opcion no valida.\a\n";
+            cout << "Opcion no valida.\n";
             break;
         }
     } while (valid != true);
