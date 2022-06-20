@@ -305,7 +305,6 @@ int main()
     cout<<"Los valores son:\n";
     presentarA();
     presentarB();
-    //cout << "\n\t";
     cout<<"Ingrese el numero de iteraciones que desea realizar: "; cin>>n;
     mayor_iter(n,A,B,a,b);
     system("pause");
