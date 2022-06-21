@@ -136,7 +136,7 @@ public:
         out << "Hora: " << p.horas << ":" << p.minutos << ":" << p.segundos;
         return out;
     }
-    void imprimir()
+    void imprimir_am_pm()
     {
         string am = "a.m.", pm = "p.m.";
         string hor, min, seg, res;
@@ -181,6 +181,6 @@ int main()
 {
     tiempo t1(14, 6, 5);
     tiempo t2(11, 4, 40);
-    t1.imprimir();
-    t2.imprimir();
+    t1.imprimir_am_pm();
+    t2.imprimir_am_pm();
 }
