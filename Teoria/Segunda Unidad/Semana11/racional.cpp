@@ -165,14 +165,9 @@ public:
         return res;
     }
 
-    friend ostream &operator<<(ostream &out, const racional &p)
-    {
-        out << "Racional: " << p.numerador << "/" << p.denominador;
-        return out;
-    }
     void imprime()
     {
-        if (numerador == 0 && denominador == 0)
+        if ((numerador == 0 && denominador == 0) || (numerador / denominador == 0))
         {
             cout << 0;
         }
@@ -189,7 +184,7 @@ public:
     void simplifica()
     {
         int resultado = 1;
-        int aux, num= numerador, den = denominador;
+        int aux, num = numerador, den = denominador;
         if (numerador < denominador)
         {
             aux = num;
@@ -215,8 +210,7 @@ public:
 
 int main()
 {
-    racional r1(2, 4);
+    racional r1(1, 2);
     racional r2(1, 3);
-    racional d = r1 * r2;
-    d.imprime();
+    r1.imprime();
 }
