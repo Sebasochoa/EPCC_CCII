@@ -8,40 +8,125 @@ public:
     static const int MAX = 10;
     nodo *sig;
 };
-
 nodo *I, *F, *T;
+nodo nuevo();
+void top();
+int pop();
+void push(int x);
+void clear();
+int size();
+bool full();
+bool empty();
+void pushfunc();
+void popfunc();
+void fullfunc();
+void emptyfunc();
+void presentar();
+void menu()
+{
+    cout << "*********************MEN" << char(233) << " PILAS*********************" << endl;
+    cout << "1: Funci" << char(162) << "n TOP\n";
+    cout << "2: Funci" << char(162) << "n POP\n";
+    cout << "3: Funci" << char(162) << "n PUSH\n";
+    cout << "4: Funci" << char(162) << "n CLEAR\n";
+    cout << "5: Funci" << char(162) << "n SIZE\n";
+    cout << "6: Funci" << char(162) << "n FULL\n";
+    cout << "7: Funci" << char(162) << "n EMPTY\n";
+    cout << "8: Mostrar la Pila\n";
+    cout << "9: SALIR\n";
+    cout << "Ingrese una opcion valida: ";
+}
+int main()
+{
+    int opc;
+    bool valid = false;
+    do
+    {
+        menu();
+        cin >> opc;
+        switch (opc)
+        {
+        case 1:
+            top();
+            break;
+        case 2:
+            popfunc();
+            break;
+        case 3:
+            pushfunc();
+            break;
+        case 4:
+            clear();
+            break;
+        case 5:
+            cout<<size()<<endl;
+            break;
+        case 6:
+            fullfunc();
+            break;
+        case 7:
+            emptyfunc();
+            break;
+        case 8:
+            presentar();
+            break;
+        case 9:
+            valid = true;
+            break;
+        default:
+            cout << "Opcion no valida.\n";
+            break;
+        }
+    } while (valid != true);
+    system("pause");
+    return 0;
+}
 nodo nuevo()
 {
+    T = new nodo();
     T->sig = NULL;
 }
 void top()
 {
-    cout << I->id;
+    if (empty() == true)
+    {
+        cout << "La pila esta vacia\n";
+    }
+    else
+        cout << I->id;
+}
+int pop()
+{
+    if (empty() != true)
+    {
+        if (I != NULL)
+        {
+            nodo *aux;
+            aux = I;
+            I = I->sig;
+            return aux->id;
+            delete aux;
+        }
+    }
 }
 void push(int x)
 {
     nuevo();
     T->id = x;
-    if (I == NULL)
+    if (full() != true)
     {
+        if (I == NULL)
+        {
+            I = T;
+        }
+        else
+        {
+            T->sig = I;
+        }
         I = T;
     }
     else
-    {
-        T->sig = I;
-    }
-    I = T;
-}
-int pop()
-{
-    if (I != NULL)
-    {
-        nodo *aux;
-        aux = I;
-        I = I->sig;
-        return aux->id;
-        delete aux;
-    }
+        cout << "Pila LLena\n";
 }
 void clear()
 {
@@ -57,30 +142,55 @@ void clear()
 int size()
 {
     nodo *i;
-    int size=0;
-    for (i = I; i != NULL; i = i->sig)
+    if (empty() == true)
     {
-        size++;
+        return 0;
     }
-    return size;
+    else
+    {
+        int size = 0;
+        for (i = I; i != NULL; i = i->sig)
+        {
+            size++;
+        }
+        return size;
+    }
 }
-bool full(){
+bool full()
+{
     int full = size();
-    if (full<T->MAX)
+    if (full < T->MAX)
     {
         return false;
-    }else
+    }
+    else
     {
         return true;
     }
 }
-bool empty(){
-    if(I==NULL){
+
+bool empty()
+{
+    if (I == NULL)
+    {
         return true;
-    } else
+    }
+    else
         return false;
 }
-void PUSHFUNC()
+void presentar()
+{
+    if (I == NULL)
+    {
+        cout << "Pila Vacia";
+    }
+    for (T = I; T != NULL; T = T->sig)
+    {
+        cout << "Int:" << T->id << "\t";
+    }
+    cout << endl;
+}
+void pushfunc()
 {
     int n;
     cout << "Cuantos elementos quiere ingresar: ";
@@ -101,72 +211,29 @@ void PUSHFUNC()
         cout << "Elementos agregados\n";
     }
 }
-void POPFUNC()
+void popfunc()
 {
-    int n;
-    cout << "Cuantos elementos quiere eliminar: ";
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        pop();
-    }
-    if (n == 1)
-    {
-        cout << "Elemento elimindado\n";
+    if(empty() == true){
+        cout<<"Pila Vacia\n";
     }
     else
-    {
-        cout << "Elementos eliminados\n";
-    }
+        cout << "Elemento "<< pop() <<" eliminado\n";
 }
-void menu()
+void fullfunc()
 {
-    cout << "*********************MEN" << char(233) << " PILAS*********************" << endl;
-    cout << "1: Insertar elementos a la PILA (Funcion PUSH)\n";
-    cout << "2: Eliminar elementos de la PILA (Funcion POP)\n";
-    cout << "4: Mostrar la Pila\n";
-    cout << "5: SALIR\n";
-    cout << "Ingrese una opcion valida: ";
-}
-void presentar()
-{
-    if (I == NULL)
+    if (full() == true)
     {
-        cout << "Pila Vacia";
+        cout << "Pila Llena\n";
     }
-    for (T = I; T != NULL; T = T->sig)
-    {
-        cout << "Int:" << T->id << "\t";
-    }
-    cout << endl;
+    else
+        cout << "Hay espacio en la Pila\n";
 }
-int main()
+void emptyfunc()
 {
-    int opc;
-    bool valid = false;
-    do
+    if (empty() == true)
     {
-        menu();
-        cin >> opc;
-        switch (opc)
-        {
-        case 1:
-            PUSHFUNC();
-            break;
-        case 2:
-            POPFUNC();
-            break;
-        case 4:
-            presentar();
-            break;
-        case 5:
-            valid = true;
-            break;
-        default:
-            cout << "Opcion no valida.\n";
-            break;
-        }
-    } while (valid != true);
-    system("pause");
-    return 0;
+        cout << "Pila Vacia\n";
+    }
+    else
+        cout << "Hay elementos en la Pila\n";
 }
