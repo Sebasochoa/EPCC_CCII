@@ -6,7 +6,7 @@ struct producto
 {
     int codigo = -1;
     string nombre;
-    float precio;
+    int precio;
     int cantidad;
 };
 void menu()
@@ -24,6 +24,24 @@ void menu2()
     cout << "2: Modificar Precio\n";
     cout << "3: Modificar Stock\n";
 }
+void cambioNombre(string **nom){
+    string aux;
+    cout << "Introduzca un Nombre: ";
+    cin>>aux;
+    **nom = aux;
+}
+void cambiarPrecio(int **num){
+    int aux;
+    cout<<"Introduzca un Precio: ";
+    cin>>aux;
+    **num = aux;
+}
+void cambiarStock(int **num){
+    int aux;
+    cout<<"Introduzca un Stock: ";
+    cin>>aux;
+    **num = aux;
+}
 int main()
 {
     struct producto prod, productos[10];
@@ -37,6 +55,16 @@ int main()
         productos[i].precio = 0;
         productos[i].cantidad = 0;
     }
+    string *nombre, **nom;
+    nom = &nombre;
+    nombre = &prod.nombre;
+    int *precio, **pr;
+    pr = &precio;
+    precio = &prod.precio;
+    int *stock, **stk;
+    stk = &stock;
+    stock = &prod.cantidad;
+
     do
     {
         menu();
@@ -135,16 +163,16 @@ int main()
                 switch (opc)
                 {
                 case 1:
-                    cout << "Introduzca un Nombre: ";
-                    cin >> productos[existe].nombre;
+                    cambioNombre(&nombre);
+                    productos[existe].nombre = prod.nombre;
                     break;
                 case 2:
-                    cout << "Introduzca un precio: ";
-                    cin >> productos[existe].precio;
+                    cambiarPrecio(&precio);
+                    productos[existe].precio = prod.precio;
                     break;
                 case 3:
-                    cout << "Introduzca un stock: ";
-                    cin >> productos[existe].cantidad;
+                    cambiarStock(&stock);
+                    productos[existe].cantidad = prod.cantidad;
                 default:
                     cout << "Opcion no valida\n";
                     break;
