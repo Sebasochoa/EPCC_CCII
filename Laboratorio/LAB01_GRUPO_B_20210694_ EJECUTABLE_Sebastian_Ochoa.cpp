@@ -56,7 +56,7 @@ int main()
 
     int str1_n;
     sscanf(str1.data(), "%d", &str1_n);
-    printf("%d\n", str1_n);
+    cout<<"%d\n", str1_n);
     return 0;
 }
 
