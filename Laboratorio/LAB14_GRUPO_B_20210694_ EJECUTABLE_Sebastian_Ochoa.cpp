@@ -13,7 +13,7 @@ void menu()
 {
     cout << "1: Alta de producto\n";
     cout << "2: Baja de un producto\n";
-    cout << "3: Buscar por nombre\n";
+    cout << "3: Buscar por Codigo\n";
     cout << "4: Modificar stock y precio\n";
     cout << "5: Mostrar Datos\n";
     cout << "6: Salir\n";
@@ -210,5 +210,6 @@ int main()
         }
 
     } while (valid != true);
+    system("pause");
     return 0;
 }
