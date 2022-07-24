@@ -37,7 +37,7 @@ public:
     {
         return cont;
     }
-    static auto getCount() -> std::size_t {
+    static auto getCount() -> size_t {
         return getcontador();
     }
 };
