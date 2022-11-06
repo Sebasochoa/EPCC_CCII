@@ -143,7 +143,7 @@ int main()
     return 0;
 }
 */
-/*
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -165,7 +165,7 @@ public:
     }
     bool operator()(Elementos i, Elementos j)
     {
-        return i.a < j.b;
+        return i.a < j.a;
     }
     template <typename T>
     void print(vector<T> &vec)
@@ -175,13 +175,14 @@ public:
             cout << i + 1 << ": " << vec.at(i).a << "  " << vec.at(i).b << endl;
         }
     }
-} Elemento;
+};
 
 int main()
 {
     srand(time(NULL));
     Elementos a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t;
     vector<Elementos> x1{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t};
+    auto Elemento = Elementos();
     cout << "Vector Desordenado: " << endl;
     a.print(x1);
     sort(x1.begin(), x1.end(), Elemento);
@@ -190,4 +191,3 @@ int main()
     system("pause");
     return 0;
 }
-*/

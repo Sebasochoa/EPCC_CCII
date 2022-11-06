@@ -1,165 +1,188 @@
-/*
 #include <iostream>
-using namespace std;
-class nodo
+
+template <class T>
+class Nodo
+{
+public:
+    T m_Dato;
+    Nodo<T> *m_pSig;
+
+    Nodo(T d)
+    {
+        m_Dato = d;
+        m_pSig = NULL;
+    }
+};
+
+template <class T>
+class Cola
 {
 private:
-public:
-    int id;
-    int cant = 0;
-    nodo *sig;
-};
-nodo *I, *F, *T;
-void Insertar_Cola(int x)
-{
-    T = new nodo();
-    T->id = x;
-    T->sig = NULL;
-    if (I == NULL)
-    {
-        I = T;
-    }
-    else
-    {
-        F->sig = T;
-    }
-    F = T;
-}
-void Eliminar_Cola()
-{
-    if (I != NULL)
-    {
-        nodo *aux;
-        aux = I;
-        I = I->sig;
-        delete aux;
-    }
-}
-void Busqueda(int pos)
-{
-    if (I != NULL)
-    {
+    Nodo<T> *m_pHead;
+    Nodo<T> *m_pLast;
 
-        nodo *aux;
-        nodo *siguiente;
-        int val=NULL;
-        aux = I;
-        for (aux = I; aux != NULL; aux = aux->sig)
+public:
+    Cola()
+    {
+        m_pHead = m_pLast = 0;
+    }
+
+    void Push(T d)
+    {
+        Nodo<T> *p_New = new Nodo<T>(d);
+        if (!m_pHead)
         {
-            if (aux->id == pos)
-            {
-                val=aux->id;
-            }
+            m_pHead = p_New;
         }
-        if (val!=NULL)
+        else
+        {
+            m_pLast->m_pSig = p_New;
+        }
+        m_pLast = p_New;
+    }
+
+    void Pop()
+    {
+        if (m_pHead)
+        {
+            Nodo<T> *p_Aux;
+            p_Aux = m_pHead;
+            m_pHead = m_pHead->m_pSig;
+            delete p_Aux;
+        }
+    }
+
+    void Search(T d)
+    {
+        if (m_pHead)
+        {
+            Nodo<T> *p_Aux;
+            T val = NULL;
+            for (p_Aux = m_pHead; p_Aux != NULL; p_Aux = p_Aux->m_pSig)
             {
-                cout << "Elemento (" << val << ") encontrado\n";
+                if (p_Aux->m_Dato == d)
+                {
+                    val = p_Aux->m_Dato;
+                }
+            }
+            if (val != NULL)
+            {
+                std::cout << "Elemento (" << val << ") encontrado\n";
             }
             else
             {
-                cout << "Elemento NO encontrado\n";
+                std::cout << "Elemento NO encontrado\n";
             }
+        }
     }
-}
-void Ingre_Func()
+
+    void Print()
+    {
+        Nodo<T> *p_Tmp;
+        std::cout << "La lista es:\n";
+        for (p_Tmp = m_pHead; p_Tmp != NULL; p_Tmp = p_Tmp->m_pSig)
+        {
+            std::cout << "Dato:" << p_Tmp->m_Dato << "\t";
+        }
+        std::cout << std::endl;
+    }
+
+    void Push_F()
+    {
+        int n;
+        std::cout << "Cuantos elementos quiere ingresar: ";
+        std::cin >> n;
+        for (int i = 0; i < n; i++)
+        {
+            T v;
+            std::cout << "Ingrese Valor: ";
+            std::cin >> v;
+            Push(v);
+        }
+        if (n == 1)
+        {
+            std::cout << "Elemento agregado\n";
+        }
+        else
+        {
+            std::cout << "Elementos agregados\n";
+        }
+    }
+
+    void Pop_F()
+    {
+        int n;
+        std::cout << "Cuantos elementos quiere eliminar: ";
+        std::cin >> n;
+        for (int i = 0; i < n; i++)
+        {
+            Pop();
+        }
+        if (n == 1)
+        {
+            std::cout << "Elemento eliminado\n";
+        }
+        else
+        {
+            std::cout << "Elementos eliminados\n";
+        }
+    }
+
+    void Search_F()
+    {
+        T v;
+        std::cout << "Ingrese el valor a buscar: ";
+        std::cin >> v;
+        Search(v);
+    }
+};
+
+void menu()
 {
-    int n;
-    cout << "Cuantos elementos quiere ingresar: ";
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        int v;
-        cout << "Ingrese Valor: ";
-        cin >> v;
-        Insertar_Cola (v);
-    }
-    if (n == 1)
-    {
-        cout << "Elemento agregado\n";
-    }
-    else
-    {
-        cout << "Elementos agregados\n";
-    }
+    std::cout << "***************MEN" << char(233) << " LISTA ENLAZADA***************" << std::endl;
+    std::cout << "1: Insertar elementos a la Cola\n";
+    std::cout << "2: Eliminar elementos de la Cola\n";
+    std::cout << "3: Busqueda de un elemento en la Cola\n";
+    std::cout << "4: Mostrar la Cola\n";
+    std::cout << "5: SALIR\n";
 }
-void Eli_Func()
-{
-    int n;
-    cout << "Cuantos elementos quiere ingresar: ";
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        Eliminar_Cola();
-    }
-    if (n == 1)
-    {
-        cout << "Elemento eliminado\n";
-    }
-    else
-    {
-        cout << "Elementos eliminados\n";
-    }
-}
-void Busquedafunc()
-{
-    int v;
-    cout << "Ingrese el valor a buscar: ";
-    cin >> v;
-    Busqueda(v);
-}
-void presentar()
-{
-    cout << "La lista es:\n";
-    for (T = I; T != NULL; T = T->sig)
-    {
-        cout << "Int:" << T->id << "\t";
-    }
-    cout << endl;
-}
-void menu(){
-    cout << "***************MEN" << char(233) << " LISTA ENLAZADA***************" << endl;
-    cout << "1: Insertar elementos a la Cola\n";
-    cout << "2: Eliminar elementos de la Cola\n";
-    cout << "3: Busqueda de un elemento en la Cola\n";
-    cout << "4: Mostrar la Cola\n";
-    cout << "5: SALIR\n";
-}
+
 int main()
 {
     int opc;
     bool valid = false;
+    Cola<int> A;
     do
     {
         menu();
-        cout << "Ingrese una opcion valida: ";
-        cin >> opc;
+        std::cout << "Ingrese una opcion valida: ";
+        std::cin >> opc;
         switch (opc)
         {
         case 1:
-            Ingre_Func();
+            A.Push_F();
             break;
         case 2:
-            Eli_Func();
+            A.Pop_F();
             break;
         case 3:
-            Busquedafunc();
+            A.Search_F();
             break;
         case 4:
-            presentar();
+            A.Print();
             break;
         case 5:
             valid = true;
             break;
         default:
-            cout << "Opcion no valida.\n";
+            std::cout << "Opcion no valida.\n";
             break;
         }
     } while (valid != true);
-    system("pause");
     return 0;
 }
-*/
 
+/*
 #include <iostream>
 #include <time.h>
 using namespace std;
@@ -289,8 +312,8 @@ void mayor_iter(int n,cola &A, cola &B, cola *a, cola *b){
     {
         cout<<"Despues de "<<n<<" iteraciones la edad de la cola B es mayor con "<<valorB<<endl;
     }
-    
-    
+
+
 }
 int main()
 {
@@ -310,3 +333,4 @@ int main()
     system("pause");
     return 0;
 }
+*/
