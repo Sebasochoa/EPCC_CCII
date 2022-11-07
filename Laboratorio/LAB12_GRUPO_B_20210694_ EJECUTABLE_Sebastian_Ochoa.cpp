@@ -1,4 +1,4 @@
-#include <iostream>
+/* #include <iostream>
 
 template <class T>
 class Nodo
@@ -180,157 +180,208 @@ int main()
         }
     } while (valid != true);
     return 0;
-}
+} */
 
-/*
 #include <iostream>
 #include <time.h>
-using namespace std;
-class nodo
+#include <iostream>
+
+template <class T>
+class Nodo
+{
+public:
+    T m_Dato;
+    Nodo<T> *m_pSig;
+
+    Nodo(T d)
+    {
+        m_Dato = d;
+        m_pSig = NULL;
+    }
+};
+
+template <class T>
+class Cola
 {
 private:
+    Nodo<T> *m_pHead;
+    Nodo<T> *m_pLast;
+
 public:
-    int id;
-    nodo *sig;
-};
-typedef class nodo cola;
-nodo *I, *F, *T;
-nodo *I2, *F2, *T2;
-void startcola(cola &p, cola *a, cola *b)
-{
-    if (a == &p)
+    Cola()
     {
-        I = T;
-    }
-    else if (b == &p)
-    {
-        I2 = T2;
-    }
-}
-void ingresar(cola &p, int x, cola *a, cola *b)
-{
-    if (a == &p)
-    {
-        T = new nodo();
-        T->id = x;
-        T->sig = NULL;
-        if (I == NULL)
-        {
-            I = T;
-        }
-        else
-        {
-            F->sig = T;
-        }
-        F = T;
+        m_pHead = m_pLast = 0;
     }
 
-    else if (b == &p)
+    void Push(T d)
     {
-        T2 = new nodo();
-        T2->id = x;
-        T2->sig = NULL;
-        if (I2 == NULL)
+        Nodo<T> *p_New = new Nodo<T>(d);
+        if (!m_pHead)
         {
-            I2 = T2;
+            m_pHead = p_New;
         }
         else
         {
-            F2->sig = T2;
+            m_pLast->m_pSig = p_New;
         }
-        F2 = T2;
+        m_pLast = p_New;
     }
-}
-int eliminar(cola &p, cola *a, cola *b)
+
+    T Pop()
+    {
+        if (m_pHead)
+        {
+            Nodo<T> *p_Aux;
+            p_Aux = m_pHead;
+            m_pHead = m_pHead->m_pSig;
+            return p_Aux->m_Dato;
+            delete p_Aux;
+        }
+    }
+
+    void Search(T d)
+    {
+        if (m_pHead)
+        {
+            Nodo<T> *p_Aux;
+            T val = NULL;
+            for (p_Aux = m_pHead; p_Aux != NULL; p_Aux = p_Aux->m_pSig)
+            {
+                if (p_Aux->m_Dato == d)
+                {
+                    val = p_Aux->m_Dato;
+                }
+            }
+            if (val != NULL)
+            {
+                std::cout << "Elemento (" << val << ") encontrado\n";
+            }
+            else
+            {
+                std::cout << "Elemento NO encontrado\n";
+            }
+        }
+    }
+
+    T Front()
+    {
+        return m_pHead->m_Dato;
+    }
+
+    void Print()
+    {
+        Nodo<T> *p_Tmp;
+        std::cout << "La lista es:\n";
+        for (p_Tmp = m_pHead; p_Tmp != NULL; p_Tmp = p_Tmp->m_pSig)
+        {
+            std::cout << "Dato:" << p_Tmp->m_Dato << "\t";
+        }
+        std::cout << std::endl;
+    }
+
+    void Push_F()
+    {
+        int n;
+        std::cout << "Cuantos elementos quiere ingresar: ";
+        std::cin >> n;
+        for (int i = 0; i < n; i++)
+        {
+            T v;
+            std::cout << "Ingrese Valor: ";
+            std::cin >> v;
+            Push(v);
+        }
+        if (n == 1)
+        {
+            std::cout << "Elemento agregado\n";
+        }
+        else
+        {
+            std::cout << "Elementos agregados\n";
+        }
+    }
+
+    void Pop_F()
+    {
+        int n;
+        std::cout << "Cuantos elementos quiere eliminar: ";
+        std::cin >> n;
+        for (int i = 0; i < n; i++)
+        {
+            Pop();
+        }
+        if (n == 1)
+        {
+            std::cout << "Elemento eliminado\n";
+        }
+        else
+        {
+            std::cout << "Elementos eliminados\n";
+        }
+    }
+
+    void Search_F()
+    {
+        T v;
+        std::cout << "Ingrese el valor a buscar: ";
+        std::cin >> v;
+        Search(v);
+    }
+};
+
+template <typename T>
+void Valores(Cola<T> &A, Cola<T> &B)
 {
-    nodo *aux;
-    if (a == &p)
-    {
-        aux = I;
-        I = I->sig;
-        return aux->id;
-        delete aux;
-    }
-    if (b == &p)
-    {
-        aux = I2;
-        I2 = I2->sig;
-        return aux->id;
-        delete aux;
-    }
-}
-void presentarA()
-{
-    cout << "Cola A\n";
-    for (T = I; T != NULL; T = T->sig)
-    {
-        cout << "Int:" << T->id << "\t";
-    }
-    cout << endl;
-}
-void presentarB()
-{
-    cout << "cola B\n";
-    for (T2 = I2; T2 != NULL; T2 = T2->sig)
-    {
-        cout << "Int:" << T2->id << "\t";
-    }
-    cout << endl;
-}
-void inicialzar_valores(cola &A, cola &B, cola *a, cola *b){
     srand(time(NULL));
-    int len1=2+rand() % (5-2);
-    int len2=2+rand() % (5-2);
+    int len1 = 2 + rand() % (5 - 2);
+    int len2 = 2 + rand() % (5 - 2);
     for (int i = 0; i < len1; i++)
     {
-        int val1=10+rand()%(30-10);
-        ingresar(A,val1,a,b);
+        T val1 = 10 + rand() % (30 - 10);
+        A.Push(val1);
     }
     for (int i = 0; i < len2; i++)
     {
-        int val2=10+rand()%(30-10);
-        ingresar(B,val2,a,b);
+        T val2 = 10 + rand() % (30 - 10);
+        B.Push(val2);
     }
 }
-void mayor_iter(int n,cola &A, cola &B, cola *a, cola *b){
+
+template <typename T>
+void Iteraciones(int n, Cola<T> &A, Cola<T> &B)
+{
     for (int i = 0; i < n; i++)
     {
-        ingresar(A,eliminar(A,a,b),a,b);
-        ingresar(B,eliminar(B,a,b),a,b);
+        A.Push(A.Pop());
+        B.Push(B.Pop());
     }
-    int valorA=I->id;
-    int valorB=I2->id;
-    if (valorA==valorB)
+    int valorA = A.Front();
+    int valorB = B.Front();
+    if (valorA == valorB)
     {
-        cout<<"Las edades de ambas colas son iguales\n";
+        std::cout << "Las edades de ambas colas son iguales\n";
     }
-    else if (valorA>valorB)
+    else if (valorA > valorB)
     {
-        cout<<"Despues de "<<n<<" iteraciones la edad de la cola A es mayor con "<<valorA<<endl;
+        std::cout << "Despues de " << n << " iteraciones la edad de la cola A es mayor con " << valorA << std::endl;
     }
-    else if (valorB>valorA)
+    else if (valorB > valorA)
     {
-        cout<<"Despues de "<<n<<" iteraciones la edad de la cola B es mayor con "<<valorB<<endl;
+        std::cout << "Despues de " << n << " iteraciones la edad de la cola B es mayor con " << valorB << std::endl;
     }
-
-
 }
 int main()
 {
     int n;
-    cola A, B;
-    cola *a = &A;
-    cola *b = &B;
-    startcola(A, a, b);
-    startcola(B, a, b);
-    cout<<"Inicializando Valores de ambas colas\n";
-    inicialzar_valores(A,B,a,b);
-    cout<<"Los valores son:\n";
-    presentarA();
-    presentarB();
-    cout<<"Ingrese el numero de iteraciones que desea realizar: "; cin>>n;
-    mayor_iter(n,A,B,a,b);
-    system("pause");
+    Cola<int> A;
+    Cola<int> B;
+    std::cout << "Inicializando Valores de ambas colas\n";
+    Valores(A, B);
+    std::cout << "Los valores son:\n";
+    A.Print();
+    B.Print();
+    std::cout << "Ingrese el numero de iteraciones que desea realizar: ";
+    std::cin >> n;
+    Iteraciones(n, A, B);
     return 0;
 }
-*/
