@@ -164,158 +164,111 @@ int main()
 }
 */
 #include <iostream>
-using namespace std;
-class nodo
+
+template <class T>
+class Nodo
+{
+public:
+    T m_Dato;
+    Nodo<T> *m_pSig;
+
+    Nodo(T d)
+    {
+        m_Dato = d;
+        m_pSig = 0;
+    }
+};
+
+template <class T>
+class Pila
 {
 private:
+    Nodo<T> *m_pTope;
+    char m_Identifier;
+
 public:
-    int id;
-    int cant = 0;
-    nodo *sig;
+    Pila(char d)
+    {
+        m_pTope = nullptr;
+        m_Identifier = d;
+    }
+
+    void Push(T d)
+    {
+        if (IsEmpty())
+        {
+            m_pTope = new Nodo<T>(d);
+        }
+        else
+        {
+            Nodo<T> *p_New = new Nodo<T>(d);
+            p_New->m_pSig = m_pTope;
+            m_pTope = p_New;
+        }
+    }
+
+    T Pop()
+    {
+        Nodo<T> *p_Tmp = m_pTope;
+        m_pTope = m_pTope->m_pSig;
+        return p_Tmp->m_Dato;
+        delete p_Tmp;
+    }
+
+    T Top()
+    {
+        if (IsEmpty())
+        {
+            return 0;
+        }
+        return m_pTope->m_Dato;
+    }
+
+    char Get_Identifier()
+    {
+        return m_Identifier;
+    }
+
+    bool IsEmpty()
+    {
+        return m_pTope == 0;
+    }
+
+    void Print()
+    {
+        Nodo<T> *p_Tmp = m_pTope;
+        while (p_Tmp)
+        {
+            if (p_Tmp->m_pSig == NULL)
+            {
+                std::cout << p_Tmp->m_Dato << std::endl;
+            }
+            else
+            {
+                std::cout << p_Tmp->m_Dato << " --> ";
+            }
+            p_Tmp = p_Tmp->m_pSig;
+        }
+    }
 };
-typedef class nodo pila;
-nodo *I, *T;
-nodo *I2, *T2;
-nodo *I3, *T3;
-void startpila(pila &p, pila *a, pila *b, pila *c)
-{
-    if (a == &p)
-    {
-        I = T;
-    }
-    else if (b == &p)
-    {
-        I2 = T2;
-    }
-    else if (c == &p)
-    {
-        I3 = T3;
-    }
-}
-void PUSH(pila &p, int x, pila *a, pila *b, pila *c)
-{
-    if (a == &p)
-    {
-        T = new nodo();
-        T->id = x;
-        T->sig = NULL;
-        T->sig = I;
-        I = T;
-    }
 
-    else if (b == &p)
-    {
-        T2 = new nodo();
-        T2->id = x;
-        T2->sig = NULL;
-        T2->sig = I2;
-        I2 = T2;
-    }
-    else if (c == &p)
-    {
-        T3 = new nodo();
-        T3->id = x;
-        T3->sig = NULL;
-        T3->sig = I3;
-        I3 = T3;
-    }
-}
-int POP(pila &p, pila *a, pila *b, pila *c)
+template <typename T>
+void hanoi(int n, Pila<T> &X, Pila<T> &Y, Pila<T> &Z)
 {
-    nodo *aux;
-    if (a == &p)
-    {
-        aux = I;
-        I = I->sig;
-        return aux->id;
-        delete aux;
-    }
-    if (b == &p)
-    {
-        aux = I2;
-        I2 = I2->sig;
-        return aux->id;
-        delete aux;
-    }
-    if (c == &p)
-    {
-        aux = I3;
-        I3 = I3->sig;
-        return aux->id;
-        delete aux;
-    }
-}
-void presentarA()
-{
-    cout << "Torre A\n";
-    for (T = I; T != NULL; T = T->sig)
-    {
-        cout << "Int:" << T->id << "\t";
-    }
-    cout << endl;
-}
-void presentarB()
-{
-    cout << "Pila B\n";
-    for (T2 = I2; T2 != NULL; T2 = T2->sig)
-    {
-        cout << "Int:" << T2->id << "\t";
-    }
-    cout << endl;
-}
-void presentarC()
-{
-    cout << "Torre C\n";
-    for (T3 = I3; T3 != NULL; T3 = T3->sig)
-    {
-        cout << "Int:" << T3->id << "\t";
-    }
-    cout <<"\n\n";
-}
-void hanoi(int n, pila &A, pila &B, pila &C, pila *a, pila *b, pila *c)
-{
-    char aux, aux1;
-    if (a == &A)
-        aux = 'A';
-    else if (b == &A)
-        aux = 'B';
-    else if (c == &A)
-        aux = 'C';
-
-    if (a == &C)
-        aux1 = 'A';
-    else if (b == &C)
-        aux1 = 'B';
-    else if (c == &C)
-        aux1 = 'C';
-
     if (n == 1)
     {
-        PUSH(C, POP(A, a, b, c), a, b, c);
-        cout << "Disco " << n << " movido de la Torre " << aux << " a la Torre " << aux1 << endl;
-        //Se puede mostrar los pasos en texto o mostrando cada pila si desea mostrarlo de la segunda 
-        //forma comente el cout anterior y quite comentario de cada "presenta"
-        
-        //presentarA();
-        //presentarB();
-        //presentarC();
-        
+        Z.Push(X.Pop());
+        std::cout << "Disco " << n << " movido de la Torre A a la Torre C" << std::endl;
     }
     else
     {
-        hanoi(n - 1, A, C, B, a, b, c);
-        PUSH(C, POP(A, a, b, c), a, b, c);
-        cout << "Disco " << n << " movido de la Torre " << aux << " a la Torre " << aux1 << endl;
-        //Se puede mostrar los pasos en texto o mostrando cada pila si desea mostrarlo de la segunda 
-        //forma comente el cout anterior y quite comentario de cada "presenta"
-        
-        //presentarA();
-        //presentarB();
-        //presentarC();
-        
-        hanoi(n - 1, B, A, C, a, b, c);
+        hanoi(n - 1, X, Z, Y);
+        Z.Push(X.Pop());
+        std::cout << "Disco " << n << " movido de la Torre " << X.Get_Identifier() << " a la Torre " << Z.Get_Identifier() << std::endl;
+        hanoi(n - 1, Y, X, Z);
     }
 }
+
 int hanoi_mov(int n)
 {
     if (n == 1)
@@ -323,40 +276,35 @@ int hanoi_mov(int n)
     else
         return 2 * hanoi_mov(n - 1) + 1;
 }
+
 int main()
 {
     int n, mov;
-    pila A, B, C;
-    pila *a = &A;
-    pila *b = &B;
-    pila *c = &C;
-    startpila(A, a, b, c);
-    startpila(B, a, b, c);
-    startpila(C, a, b, c);
+    Pila<int> A('A');
+    Pila<int> B('B');
+    Pila<int> C('C');
 
-    cout << "******\tTORRE DE HANOI\t******\n";
-    cout << "Ingrese la cantidad de discos con los que quiere jugar: ";
-    cin >> n;
+    std::cout << "******\tTORRE DE HANOI\t******\n";
+    std::cout << "Ingrese la cantidad de discos con los que quiere jugar: ";
+    std::cin >> n;
 
-    cout << "Inicializando la Torre A con disco(s) del 1 al " << n << endl;
+    std::cout << "Inicializando la Torre A con disco(s) del 1 al " << n << std::endl;
     for (int i = n; i > 0; i--)
     {
-        PUSH(A, i, a, b, c);
+        A.Push(i);
     }
-    cout << "Torre A llena correctamente\n\n";
+    std::cout << "Torre A llena correctamente\n\n";
 
-    cout << "Los elementos de la ";
-    presentarA();
-    cout << "\n\t";
+    std::cout << "Los elementos de la Torre A:";
+    A.Print();
+    std::cout << "\n\t";
     system("pause");
 
-    cout << "Resolucion de Torres de Hanoi:\n";
-    hanoi(n, A, B, C, a, b, c);
+    std::cout << "Resolucion de Torres de Hanoi:\n";
+    hanoi(n, A, B, C);
     mov = hanoi_mov(n);
-    cout << "Se resolvio con " << mov << " movimientos\n";
-    cout << endl;
-
-    presentarC();
-    system("pause");
+    std::cout << "Se resolvio con " << mov << " movimientos\n";
+    std::cout << std::endl;
+    C.Print();
     return 0;
 }
